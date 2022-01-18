@@ -4,6 +4,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
+import TodoCategorySelector from "./TodoCategorySelector";
 
 function Todo(props) {
   const [edit, setEdit] = useState({
@@ -36,10 +37,11 @@ function Todo(props) {
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  let Aarray = ['a','b','c'];
-
+  let arr = ["a", "b", "c"];
 
   return (
+    //parent
+
     <div>
       {props.todos.map((todo) => {
         if (
@@ -64,7 +66,8 @@ function Todo(props) {
                     event.preventDefault();
                     props.changeTodoName(
                       todo.id,
-                      document.getElementById("input" + todo.id).value
+                      document.getElementById("input" + todo.id).value,
+                      document.getElementById("category"+todo.id).value
                     );
                   }}
                 >
@@ -74,6 +77,15 @@ function Todo(props) {
                     className="todo-task-nameChange-input"
                     id={"input" + todo.id}
                   />
+
+                  {/* <select className="chooseCategory" id={"category" + todo.id}>
+                    {props.categories.map((element) => (
+                      <option key={element.id}>{element.name}</option>
+                    ))}
+                  </select> */}
+
+                  <TodoCategorySelector categories={props.categories} id={todo.id} editTodoCategory={props.editTodoCategory} />
+
                 </form>
 
                 <RiCloseCircleLine
@@ -87,23 +99,25 @@ function Todo(props) {
                 className="todo-secondary-text"
               >
                 {todo.category}
-                
                 <BsDot className="dot-icon" />{" "}
                 <AiTwotoneCalendar className="calender-icon" /> Due{" "}
                 {todo.dueDate}
               </div>
-              <form onSubmit={
-                (evt) =>
-                {
+              {/* <form
+                onSubmit={(evt) => {
                   evt.preventDefault();
                   props.handleCategoryChange(
                     todo.id,
-                    document.getElementById('category' + todo.id).value
-                  )
-                }
-              }>
-                <input type="text" id={'category'+todo.id} className="chooseCategory"></input>
-              </form>
+                    document.getElementById("category" + todo.id).value
+                  );
+                }}
+              > */}
+                {/* <input
+                  type="text"
+                  id={"category" + todo.id}
+                  className="chooseCategory"
+                ></input> 
+              </form>*/}
             </div>
           );
         }

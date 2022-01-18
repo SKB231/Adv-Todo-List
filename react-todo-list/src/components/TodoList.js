@@ -63,10 +63,10 @@ function TodoList(props) {
 
   const toggleInputFields = (id, shouldToggleOn) => {
     let inpElement = document.getElementById("input" + id);
+    console.log(inpElement, id)
     let textElement = document.getElementById("text" + id);
     let secondaryText = document.getElementById('secondaryText'+id);
     let selector = document.getElementById('category'+id);
-
 
     if (!shouldToggleOn) {
       inpElement.classList.remove("changeOngoing");
@@ -91,8 +91,10 @@ function TodoList(props) {
     let clickedElement = e.target.id.match(/\d+/);
     if (!clickedElement || clickedElement[0] != currentlySelectedTodoElement) {
       
-      toggleInputFields(currentlySelectedTodoElement, false);
-      removeAllEventListeners();
+      let formElement = document.getElementById("form" + currentlySelectedTodoElement);
+      formElement.requestSubmit();
+      // toggleInputFields(currentlySelectedTodoElement, false);
+      // removeAllEventListeners();
     }
   };
 
@@ -154,19 +156,34 @@ function TodoList(props) {
     domElement.classList.add("Selected");
   };
 
-  const changeTodoName = (id, newName) => {
+  const editTodoProp = (id, newName, todoCategory) => {
     let oldTodos = JSON.parse(JSON.stringify(todos));
 
     oldTodos = todos.map((todo) => {
       if (todo.id === id) {
         todo.text.input = newName;
+        todo.category = todoCategory;
       }
-
       return todo;
     });
 
     setTodos(oldTodos);
   };
+
+
+  const editTodoCategory = (id, todoCategory) => {
+    let oldTodos = JSON.parse(JSON.stringify(todos));
+
+    oldTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.text.input = todo.text.input;
+        todo.category = todoCategory;
+      }
+      return todo;
+    });
+
+    setTodos(oldTodos);
+  }
 
   return (
     <div className="todo-list">
@@ -178,9 +195,10 @@ function TodoList(props) {
         updateTodo={updateTodo}
         categoryToDisplay="All"
         handleTodoClick={handleTodoClick}
-        changeTodoName={changeTodoName}
+        changeTodoName={editTodoProp}
         categories={props.categories} changeCategories={props.changeCategories}
-
+        editTodoCategory={editTodoCategory}
+        
         categoryChange={handleCategoryChange}
       />
       <TodoForm onSubmit={addTodo} categoryName={props.categoryName} />
