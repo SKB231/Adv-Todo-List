@@ -43,7 +43,6 @@ function Todo(props) {
 
   let arr = ["a", "b", "c"];
 
-
   return (
     //parent
 
@@ -85,12 +84,10 @@ function Todo(props) {
                       document
                         .getElementById(todo.id)
                         .classList.toggle("Completed");
-                        props.changeTodoStatus(todo.id);
-                    }
-                  }
+                      props.changeTodoStatus(todo.id);
+                    }}
                   />
                 )}
-                
 
                 <div className="todo-text" id={"text" + todo.id}>
                   {todo.text.input}
@@ -119,14 +116,30 @@ function Todo(props) {
                       <option key={element.id}>{element.name}</option>
                     ))}
                   </select> */}
-
-                  <TodoCategorySelector
-                    categories={props.categories}
-                    id={todo.id}
-                    editTodoCategory={props.editTodoCategory}
-                    value={todo.category}
-                  />
-
+                  <div className="Selectors">
+                    <TodoCategorySelector
+                      categories={props.categories}
+                      id={todo.id}
+                      editTodoCategory={props.editTodoCategory}
+                      value={todo.category}
+                    />
+                    <div
+                      id={"calenderDisplay" + todo.id}
+                      className="divButton"
+                      onClick={(evt) => {
+                        document
+                          .getElementById("Calendar" + todo.id)
+                          .classList.toggle("Selected");
+                      }}
+                    >
+                      {todo.dueDate}
+                    </div>
+                    <SearchDate
+                      id={todo.id}
+                      dueDate={todo.dueDate}
+                      onDueDateChanged={props.onDueDateChanged}
+                    />
+                  </div>
                 </form>
 
                 <div className="delete-icon" id={"delete" + todo.id}>

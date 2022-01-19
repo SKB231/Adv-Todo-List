@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
+export default function MyApp(props) {
+  const [value, onChange] = useState(new Date(props.dueDate));
 
-export default function MyApp() {
-  const [value, onChange] = useState(new Date());
+  const handleDueDateChanged = (newDate) => {
+
+    console.log(newDate.toLocaleDateString("en-us"));
+    onChange(newDate);
+    props.onDueDateChanged(newDate.toLocaleDateString("en-us"),props.id);
+  }
 
   return (
-    <div className='coverer'>
-        <div className='calenderContainer'>
-            <Calendar
-                    className='calender'
-                    onChange={onChange}
-                    value={value}
-                />
-        </div>
-      
+    <div className="calenderContainer" id={"Calendar"+props.id}>
+      <Calendar className="calender" onChange={handleDueDateChanged} value={value} />
     </div>
   );
 }

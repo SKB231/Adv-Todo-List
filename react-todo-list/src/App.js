@@ -56,16 +56,15 @@ function App() {
   
 
   return (
-    <SearchDate id={100}/>
-    // <div className='todo-app'>
-    //   <div ref={glassWindow} id="inner-window-id" className="inner-window">
-    //     <div className="headerDiv">{dateToday+', '+todayTime}</div>
-    //     <TodoCategories categories={categories} changeCategories={changeCategories} handleClickCategory={changeActiveCategory}/>
-    //     <TodoList categoryName={categoryName} categories={categories} changeCategories={changeCategories} changeSelectedTodo={changeSelectedTodo} category = {categoryName}/>
-    //   </div>
-    //   <div className='circle1'></div> 
-    //   <div className='circle2'></div>
-    // </div>
+    <div className='todo-app'>
+      <div ref={glassWindow} id="inner-window-id" className="inner-window">
+        <div className="headerDiv">{dateToday}</div>
+        <TodoCategories categories={categories} changeCategories={changeCategories} handleClickCategory={changeActiveCategory}/>
+        <TodoList categoryName={categoryName} categories={categories} changeCategories={changeCategories} changeSelectedTodo={changeSelectedTodo} category = {categoryName}/>
+      </div>
+      <div className='circle1'></div> 
+      <div className='circle2'></div>
+    </div>
   );
 }
 

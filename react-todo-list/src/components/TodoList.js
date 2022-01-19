@@ -10,17 +10,17 @@ function TodoList(props) {
   let singleSelectedTodoElement;
   let currentlySelectedTodoElement;
   
-  
+
+
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text) || todo.text === "") {
       return;
     }
     const newTodos = [todo, ...todos];
-
     setTodos(newTodos);
   };
-
+  
   const completeTodo = (id) => {
     let updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
@@ -68,12 +68,16 @@ function TodoList(props) {
     let textElement = document.getElementById("text" + id);
     let secondaryText = document.getElementById('secondaryText'+id);
     let selector = document.getElementById('category'+id);
-
+    let calendar = document.getElementById('Calendar'+id);
+    let button = document.getElementById("calenderDisplay" + id);
+    console.log(button);
     if (!shouldToggleOn) {
       inpElement.classList.remove("changeOngoing");
       textElement.classList.remove("changeOngoing");
       secondaryText.classList.remove("changeOngoing");
       selector.classList.remove("changeOngoing");
+      calendar.classList.remove('Selected');
+      button.classList.remove('Selected');
     } else {
       let newNameTextElement = document.getElementById("input" + id);
       let titleTextElement = document.getElementById("text" + id);
@@ -81,14 +85,21 @@ function TodoList(props) {
       newNameTextElement.focus();
       titleTextElement.classList.add("changeOngoing");
       secondaryText.classList.add("changeOngoing");
-
       selector.classList.add("changeOngoing");
-
       newNameTextElement.value = titleTextElement.innerText;
+      button.classList.add('Selected');
+
     }
   };
 
   const clickAwayEvent = (e) => {
+
+
+    if(e.target.parentNode.className.includes('react-calendar'))
+    {
+      return;
+    }
+
 
     let clickedElement = e.target.id.match(/\d+/);
     if (!clickedElement || clickedElement[0] != currentlySelectedTodoElement) {
@@ -186,6 +197,21 @@ function TodoList(props) {
 
     setTodos(oldTodos);
   }
+
+  const onDueDateChanged = (newDate, id) =>
+  {
+
+    let oldTodos = JSON.parse(JSON.stringify(todos));
+
+    oldTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.dueDate = newDate;
+      }
+      return todo;
+    });
+
+    setTodos(oldTodos);
+  }
   return (
     <div className="todo-list">
       <Todo
@@ -200,6 +226,7 @@ function TodoList(props) {
         categories={props.categories} changeCategories={props.changeCategories}
         editTodoCategory={editTodoCategory}
         
+        onDueDateChanged={onDueDateChanged}
         changeTodoStatus= {changeTodoCompletedStatus}
       />
       <TodoForm onSubmit={addTodo} categoryName={props.categoryName} />
