@@ -9,6 +9,8 @@ function TodoList(props) {
 
   let singleSelectedTodoElement;
   let currentlySelectedTodoElement;
+  
+  
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text) || todo.text === "") {
@@ -63,7 +65,6 @@ function TodoList(props) {
 
   const toggleInputFields = (id, shouldToggleOn) => {
     let inpElement = document.getElementById("input" + id);
-    console.log(inpElement, id)
     let textElement = document.getElementById("text" + id);
     let secondaryText = document.getElementById('secondaryText'+id);
     let selector = document.getElementById('category'+id);
@@ -88,11 +89,12 @@ function TodoList(props) {
   };
 
   const clickAwayEvent = (e) => {
+
     let clickedElement = e.target.id.match(/\d+/);
     if (!clickedElement || clickedElement[0] != currentlySelectedTodoElement) {
       
       let formElement = document.getElementById("form" + currentlySelectedTodoElement);
-      formElement.requestSubmit();
+      {formElement &&  formElement.requestSubmit()};
       // toggleInputFields(currentlySelectedTodoElement, false);
       // removeAllEventListeners();
     }
@@ -184,7 +186,6 @@ function TodoList(props) {
 
     setTodos(oldTodos);
   }
-
   return (
     <div className="todo-list">
       <Todo
@@ -199,15 +200,23 @@ function TodoList(props) {
         categories={props.categories} changeCategories={props.changeCategories}
         editTodoCategory={editTodoCategory}
         
-        categoryChange={handleCategoryChange}
+        changeTodoStatus= {changeTodoCompletedStatus}
       />
       <TodoForm onSubmit={addTodo} categoryName={props.categoryName} />
     </div>
   );
 
-   function handleCategoryChange(id, value)
+   function changeTodoCompletedStatus(id)
    {
-        console.log("RecievedElement");
+    let oldTodos = JSON.parse(JSON.stringify(todos));
+
+    oldTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;        
+      }
+      return todo;
+    });
+    setTodos(oldTodos);
    }
 
 }

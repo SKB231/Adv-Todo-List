@@ -1,8 +1,8 @@
 import './App.css';
-import TodoList from './components/TodoList'
-import TodoCategories from './components/TodoCategories';
 import {useState, useRef} from 'react';
-import { AiFillPropertySafety } from 'react-icons/ai';
+import TodoCategories from './components/TodoCategories';
+import TodoList from './components/TodoList';
+import SearchDate from './components/SearchDate';
 
 function App() {
 
@@ -52,20 +52,20 @@ function App() {
   }
   
   let glassWindow = useRef();
+
+  
+
   return (
-    <div className='todo-app'>
-      <div ref={glassWindow} id="inner-window-id" className="inner-window">
-        <div className="headerDiv">{dateToday+', '+todayTime}</div>
-        <TodoCategories categories={categories} changeCategories={changeCategories} handleClickCategory={changeActiveCategory}/>
-        <TodoList categoryName={categoryName} categories={categories} changeCategories={changeCategories} changeSelectedTodo={changeSelectedTodo} category = {categoryName}/>
-      </div>
-      
-
-
-      <div className='circle1'></div> 
-      <div className='circle2'></div>
-      
-    </div>
+    <SearchDate id={100}/>
+    // <div className='todo-app'>
+    //   <div ref={glassWindow} id="inner-window-id" className="inner-window">
+    //     <div className="headerDiv">{dateToday+', '+todayTime}</div>
+    //     <TodoCategories categories={categories} changeCategories={changeCategories} handleClickCategory={changeActiveCategory}/>
+    //     <TodoList categoryName={categoryName} categories={categories} changeCategories={changeCategories} changeSelectedTodo={changeSelectedTodo} category = {categoryName}/>
+    //   </div>
+    //   <div className='circle1'></div> 
+    //   <div className='circle2'></div>
+    // </div>
   );
 }
 

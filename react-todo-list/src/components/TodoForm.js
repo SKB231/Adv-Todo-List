@@ -19,6 +19,7 @@ function TodoForm(props) {
       text: { input },
       category: props.categoryName,
       dueDate: new Date().toLocaleDateString("en-us"),
+      completed: false
     });
     setInput("");
   };

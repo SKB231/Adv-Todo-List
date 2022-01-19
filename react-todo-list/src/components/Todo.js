@@ -1,10 +1,14 @@
 import React, { Component, useState, useEffect, useRef } from "react";
 import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
-import { TiEdit } from "react-icons/ti";
-import { AiTwotoneCalendar } from "react-icons/ai";
+import {
+  AiTwotoneCalendar,
+  AiOutlineCheck,
+  AiFillCheckCircle,
+} from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import TodoCategorySelector from "./TodoCategorySelector";
+import SearchDate from "./SearchDate";
 
 function Todo(props) {
   const [edit, setEdit] = useState({
@@ -39,6 +43,7 @@ function Todo(props) {
 
   let arr = ["a", "b", "c"];
 
+
   return (
     //parent
 
@@ -56,6 +61,37 @@ function Todo(props) {
               className="todo-container"
             >
               <div className="todo" id={todo.id + "secondaryContainer"}>
+                {!todo.completed && (
+                  <AiOutlineCheck
+                    className="check-icon"
+                    onClick={() => {
+                      document
+                        .getElementById("text" + todo.id)
+                        .classList.toggle("Completed");
+                      document
+                        .getElementById(todo.id)
+                        .classList.toggle("Completed");
+                      props.changeTodoStatus(todo.id);
+                    }}
+                  />
+                )}
+                {todo.completed && (
+                  <AiFillCheckCircle
+                    className="check-icon"
+                    onClick={() => {
+                      document
+                        .getElementById("text" + todo.id)
+                        .classList.toggle("Completed");
+                      document
+                        .getElementById(todo.id)
+                        .classList.toggle("Completed");
+                        props.changeTodoStatus(todo.id);
+                    }
+                  }
+                  />
+                )}
+                
+
                 <div className="todo-text" id={"text" + todo.id}>
                   {todo.text.input}
                 </div>
@@ -67,7 +103,7 @@ function Todo(props) {
                     props.changeTodoName(
                       todo.id,
                       document.getElementById("input" + todo.id).value,
-                      document.getElementById("category"+todo.id).value
+                      document.getElementById("category" + todo.id).value
                     );
                   }}
                 >
@@ -84,15 +120,21 @@ function Todo(props) {
                     ))}
                   </select> */}
 
-                  <TodoCategorySelector categories={props.categories} id={todo.id} editTodoCategory={props.editTodoCategory} />
+                  <TodoCategorySelector
+                    categories={props.categories}
+                    id={todo.id}
+                    editTodoCategory={props.editTodoCategory}
+                    value={todo.category}
+                  />
 
                 </form>
 
-                <RiCloseCircleLine
-                  onClick={() => props.removeTodo(todo.id)}
-                  className="delete-icon"
-                  id={"delete" + todo.id}
-                />
+                <div className="delete-icon" id={"delete" + todo.id}>
+                  <RiCloseCircleLine
+                    className="icon"
+                    onClick={() => props.removeTodo(todo.id)}
+                  />
+                </div>
               </div>
               <div
                 id={"secondaryText" + todo.id}
@@ -103,21 +145,6 @@ function Todo(props) {
                 <AiTwotoneCalendar className="calender-icon" /> Due{" "}
                 {todo.dueDate}
               </div>
-              {/* <form
-                onSubmit={(evt) => {
-                  evt.preventDefault();
-                  props.handleCategoryChange(
-                    todo.id,
-                    document.getElementById("category" + todo.id).value
-                  );
-                }}
-              > */}
-                {/* <input
-                  type="text"
-                  id={"category" + todo.id}
-                  className="chooseCategory"
-                ></input> 
-              </form>*/}
             </div>
           );
         }

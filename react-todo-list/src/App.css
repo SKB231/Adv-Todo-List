@@ -7,7 +7,7 @@
 
 .todo-app {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background: linear-gradient(to right top, #65dfc9, #6cdbeb);
   display: flex;
   justify-content: center;
@@ -135,10 +135,6 @@
   display: block;
 }
 
-.delete-icon:hover {
-  fill-opacity: 1;
-}
-
 .edit-icon {
   margin-right: 1rem;
   fill-opacity: 0.5;
@@ -150,11 +146,11 @@
 
 .Category {
   padding: 0.25rem 0.5rem;
-  background: rgba(223, 223, 223, 0.151);
+  margin-left: 0.1rem;
+  background: rgba(223, 223, 223, 0);
   margin: 0.1rem 0.3rem;
   font-size: 0.75rem;
   border-radius: 0.25rem;
-  text-align: center;
   color: rgba(44, 44, 44, 0.589);
 }
 
@@ -189,6 +185,10 @@
   display: none;
 }
 
+.todo-text.Completed {
+  text-decoration: line-through;
+}
+
 .todo-text.changeOngoing {
   display: none;
 }
@@ -221,6 +221,23 @@
   padding-left: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.todo-container.Completed {
+  background: #91919136;
+}
+.todo-container.Selected.Completed {
+  background: rgba(128, 128, 128, 0.24);
+}
+.todo-container.Complted:hover {
+  background: rgba(128, 128, 128, 0.212);
+}
+.todo-container.Selected.Completed:hover {
+  background: rgba(128, 128, 128, 0.212);
+}
+
+.todo-container.Completed:hover {
+  background: rgba(128, 128, 128, 0.212);
 }
 
 .todo-container.Selected {
@@ -287,4 +304,80 @@
 
 .chooseCategory {
   display: none;
+}
+
+select {
+  margin-top: 0.5rem;
+  width: 60%;
+  outline: none;
+  border: none;
+  padding: 0.3rem;
+  background: rgba(221, 221, 221, 0.459);
+  top: calc(100% + 0.5rem);
+  left: 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+option {
+  margin: 0;
+  padding: 1rem 0;
+  outline: none;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.466);
+}
+
+option:first-child {
+  padding-top: 0;
+}
+
+option:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.icon {
+  margin-right: 0.3rem;
+}
+.icon:last-child {
+  margin-right: 0rem;
+}
+.icon:hover {
+  fill-opacity: 1;
+}
+
+.check-icon {
+  fill-opacity: 0.5;
+  margin-right: 1rem;
+}
+.check-icon:hover {
+  fill-opacity: 1;
+  color: red;
+}
+
+.calender {
+  position: absolute;
+  z-index: 1000;
+}
+
+.DateInput {
+  display: flex;
+}
+
+.coverer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background: #91919162;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calenderContainer {
+  padding: 0rem;
+  background: transparent;
+  width: 21.85rem;
+  height: 21rem;
 }
