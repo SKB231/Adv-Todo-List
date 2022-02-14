@@ -1,4 +1,4 @@
-#Todo List V2
+#TodoList V2
 
 Front End application created using ReactJS, and deployed in github pages.
 
