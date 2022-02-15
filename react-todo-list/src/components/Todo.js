@@ -21,12 +21,12 @@ function Todo(props) {
     setEdit({
       id: null,
       value: "",
-      categoryName: "None",
+      categoryName: "All",
     });
   };
 
   function checkTodo(todo) {
-    if (props.categoryName === "None") {
+    if (props.categoryName === "All") {
       return true;
     }
 
@@ -41,7 +41,6 @@ function Todo(props) {
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  let arr = ["a", "b", "c"];
 
   return (
     //parent
@@ -50,7 +49,7 @@ function Todo(props) {
       {props.todos.map((todo) => {
         if (
           props.categoryName === todo.category ||
-          props.categoryName === "None"
+          props.categoryName === "All"
         ) {
           return (
             <div

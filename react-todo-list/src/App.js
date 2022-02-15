@@ -14,18 +14,9 @@ function App() {
   });
 
   let [selectedTodoStateVer, changeSelectedTodo] = useState(0);
-  let [categoryName,setCategory] = useState('None');
+  let [categoryName,setCategory] = useState('All');
 
-  const [categories, changeCategories] = useState([
-    {
-      id: Math.floor(Math.random()*10000 + 1),
-      name: 'Category 1'
-    },
-    {
-      id: Math.floor(Math.random()*10000 + 1),
-      name: 'Category 2'
-    }
-  ]);
+  const [categories, changeCategories] = useState([]);
 
 
 
