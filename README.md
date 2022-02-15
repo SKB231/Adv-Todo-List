@@ -2,8 +2,7 @@
 
 Front End application created using ReactJS, and deployed in github pages.
 
-https://SKB231.github.io/Todo-List-V2
-
+https://skb231.github.io/Todo-List-v2/
 
 Features include:
 - By default, it allows users to create todo items and give their names
