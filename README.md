@@ -1,5 +1,6 @@
 # Todo List V2
 
+This is a better version of a todo list we can implement. It has more features as stated below. 
 Front End application created using ReactJS, and deployed in github pages.
 
 https://skb231.github.io/Todo-List-v2/
